@@ -21,8 +21,6 @@ namespace NumberSystemConverter
         {
 
             int decInput = 0;
-            int decOutput = 0;
-            int binaryOutput = 0;
 
             string input_decNumber;
             string input_binaryNumber;
@@ -84,9 +82,9 @@ namespace NumberSystemConverter
 
                 input_hexNumber = txt_input.Text;
 
-                decOutput = Convert.ToInt32(input_hexNumber, 16);
+                output_dec = Convert.ToString(Convert.ToInt32(input_hexNumber, 16));
 
-                txt_output.Text = decOutput.ToString();
+                txt_output.Text = output_dec;
 
             }
             // Convert Hex to Binary
