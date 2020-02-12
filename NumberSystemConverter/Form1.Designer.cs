@@ -23,8 +23,8 @@
         #region Vom Windows Form-Designer generierter Code
 
         /// <summary>
-        /// Erforderliche Methode für die Designerunterstützung.
-        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -39,10 +39,12 @@
             this.comboBox_output = new System.Windows.Forms.ComboBox();
             this.comboBox_input = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ascii_reminder = new System.Windows.Forms.Label();
             this.label_output = new System.Windows.Forms.Label();
             this.txt_output = new System.Windows.Forms.RichTextBox();
             this.txt_input = new System.Windows.Forms.RichTextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btn_copy = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -61,24 +63,26 @@
             // 
             // btn_convert
             // 
-            this.btn_convert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btn_convert.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_convert.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (169)))), ((int) (((byte) (0)))),
+                ((int) (((byte) (0)))));
+            this.btn_convert.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (169)))),
+                ((int) (((byte) (0)))), ((int) (((byte) (0)))));
             this.btn_convert.FlatAppearance.BorderSize = 0;
             this.btn_convert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_convert.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_convert.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btn_convert.ForeColor = System.Drawing.Color.White;
             this.btn_convert.Location = new System.Drawing.Point(649, -1);
             this.btn_convert.Name = "btn_convert";
             this.btn_convert.Size = new System.Drawing.Size(126, 33);
             this.btn_convert.TabIndex = 1;
-            this.btn_convert.Text = "convert";
+            this.btn_convert.Text = "CONVERT";
             this.btn_convert.UseVisualStyleBackColor = false;
             this.btn_convert.Click += new System.EventHandler(this.btn_convert_Click);
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(181, 26);
             // 
@@ -122,36 +126,35 @@
             // 
             this.comboBox_output.BackColor = System.Drawing.Color.White;
             this.comboBox_output.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_output.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_output.Font = new System.Drawing.Font("Roboto Condensed", 12F,
+                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.comboBox_output.FormattingEnabled = true;
-            this.comboBox_output.Items.AddRange(new object[] {
-            "Decimal",
-            "Binary",
-            "Hex"});
+            this.comboBox_output.Items.AddRange(new object[] {"Decimal", "ASCII", "Binary", "Hex"});
             this.comboBox_output.Location = new System.Drawing.Point(284, 23);
             this.comboBox_output.Name = "comboBox_output";
             this.comboBox_output.Size = new System.Drawing.Size(121, 27);
             this.comboBox_output.TabIndex = 8;
-            this.comboBox_output.SelectedIndexChanged += new System.EventHandler(this.ComboBox_output_SelectedIndexChanged);
+            this.comboBox_output.SelectedIndexChanged +=
+                new System.EventHandler(this.ComboBox_output_SelectedIndexChanged);
             // 
             // comboBox_input
             // 
             this.comboBox_input.BackColor = System.Drawing.Color.White;
             this.comboBox_input.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_input.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_input.Font = new System.Drawing.Font("Roboto Condensed", 12F,
+                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.comboBox_input.FormattingEnabled = true;
-            this.comboBox_input.Items.AddRange(new object[] {
-            "Decimal",
-            "Binary",
-            "Hex"});
+            this.comboBox_input.Items.AddRange(new object[] {"Decimal", "ASCII", "Binary", "Hex"});
             this.comboBox_input.Location = new System.Drawing.Point(69, 23);
             this.comboBox_input.Name = "comboBox_input";
             this.comboBox_input.Size = new System.Drawing.Size(121, 27);
             this.comboBox_input.TabIndex = 7;
-            this.comboBox_input.SelectedIndexChanged += new System.EventHandler(this.ComboBox_input_SelectedIndexChanged);
+            this.comboBox_input.SelectedIndexChanged +=
+                new System.EventHandler(this.ComboBox_input_SelectedIndexChanged);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.ascii_reminder);
             this.panel2.Controls.Add(this.label_output);
             this.panel2.Controls.Add(this.txt_output);
             this.panel2.Controls.Add(this.txt_input);
@@ -160,6 +163,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(775, 309);
             this.panel2.TabIndex = 5;
+            // 
+            // ascii_reminder
+            // 
+            this.ascii_reminder.AutoSize = true;
+            this.ascii_reminder.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.ascii_reminder.Location = new System.Drawing.Point(81, 7);
+            this.ascii_reminder.Name = "ascii_reminder";
+            this.ascii_reminder.Size = new System.Drawing.Size(312, 18);
+            this.ascii_reminder.TabIndex = 8;
+            this.ascii_reminder.Text = "(Remember to set a \'0\' in front of the number)";
+            this.ascii_reminder.Visible = false;
             // 
             // label_output
             // 
@@ -172,9 +187,11 @@
             // 
             // txt_output
             // 
-            this.txt_output.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(62)))), ((int)(((byte)(62)))));
+            this.txt_output.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (62)))), ((int) (((byte) (62)))),
+                ((int) (((byte) (62)))));
             this.txt_output.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_output.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_output.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Bold,
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txt_output.ForeColor = System.Drawing.Color.White;
             this.txt_output.Location = new System.Drawing.Point(1, 182);
             this.txt_output.Name = "txt_output";
@@ -185,9 +202,11 @@
             // 
             // txt_input
             // 
-            this.txt_input.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(62)))), ((int)(((byte)(62)))));
+            this.txt_input.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (62)))), ((int) (((byte) (62)))),
+                ((int) (((byte) (62)))));
             this.txt_input.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_input.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_input.Font = new System.Drawing.Font("Roboto Condensed", 12F, System.Drawing.FontStyle.Bold,
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.txt_input.ForeColor = System.Drawing.Color.White;
             this.txt_input.Location = new System.Drawing.Point(0, 29);
             this.txt_input.Name = "txt_input";
@@ -197,6 +216,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btn_copy);
             this.panel3.Controls.Add(this.btn_clear);
             this.panel3.Controls.Add(this.btn_convert);
             this.panel3.Location = new System.Drawing.Point(13, 406);
@@ -204,32 +224,54 @@
             this.panel3.Size = new System.Drawing.Size(775, 32);
             this.panel3.TabIndex = 6;
             // 
+            // btn_copy
+            // 
+            this.btn_copy.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (169)))), ((int) (((byte) (0)))),
+                ((int) (((byte) (0)))));
+            this.btn_copy.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (169)))),
+                ((int) (((byte) (0)))), ((int) (((byte) (0)))));
+            this.btn_copy.FlatAppearance.BorderSize = 0;
+            this.btn_copy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_copy.Font = new System.Drawing.Font("Roboto", 15.75F);
+            this.btn_copy.Location = new System.Drawing.Point(131, 0);
+            this.btn_copy.Name = "btn_copy";
+            this.btn_copy.Size = new System.Drawing.Size(126, 33);
+            this.btn_copy.TabIndex = 1;
+            this.btn_copy.Text = "COPY";
+            this.btn_copy.UseVisualStyleBackColor = false;
+            this.btn_copy.Click += new System.EventHandler(this.btn_copy_Click);
+            // 
             // btn_clear
             // 
-            this.btn_clear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btn_clear.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btn_clear.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (169)))), ((int) (((byte) (0)))),
+                ((int) (((byte) (0)))));
+            this.btn_clear.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (169)))),
+                ((int) (((byte) (0)))), ((int) (((byte) (0)))));
             this.btn_clear.FlatAppearance.BorderSize = 0;
             this.btn_clear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_clear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_clear.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_clear.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.btn_clear.ForeColor = System.Drawing.Color.White;
             this.btn_clear.Location = new System.Drawing.Point(-1, 0);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(126, 33);
             this.btn_clear.TabIndex = 1;
-            this.btn_clear.Text = "clear";
+            this.btn_clear.Text = "CLEAR";
             this.btn_clear.UseVisualStyleBackColor = false;
             this.btn_clear.Click += new System.EventHandler(this.Btn_clear_Click);
             // 
             // Form1
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (30)))), ((int) (((byte) (30)))),
+                ((int) (((byte) (30)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -242,26 +284,27 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion
 
+        private System.Windows.Forms.Label label_to;
         private System.Windows.Forms.Label label_from;
         private System.Windows.Forms.Button btn_convert;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.Label label_to;
+        private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.Label label_input;
+        private System.Windows.Forms.Label label_output;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label_output;
         private System.Windows.Forms.RichTextBox txt_input;
         private System.Windows.Forms.RichTextBox txt_output;
-        private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.ComboBox comboBox_input;
         private System.Windows.Forms.ComboBox comboBox_output;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.Label ascii_reminder;
+        private System.Windows.Forms.Button btn_copy;
     }
 }
 

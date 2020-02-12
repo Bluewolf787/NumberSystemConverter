@@ -15,6 +15,10 @@ namespace NumberSystemConverter
         public Form1()
         {
             InitializeComponent();
+
+            comboBox_input.SelectedIndex = 0;
+            comboBox_output.SelectedIndex = 2;
+
         }
 
         private void btn_convert_Click(object sender, EventArgs e)
@@ -22,82 +26,393 @@ namespace NumberSystemConverter
 
             int decInput = 0;
 
-            string input_decNumber;
-            string input_binaryNumber;
-            string input_hexNumber;
+            string inputDec;
+            string inputAscii;
+            string inputBin;
+            string inputHex;
 
-            string output_dec;
-            string output_binary;
-            string output_hex;
+            string outputDec;
+            string outputAscii;
+            string outputBin;
+            string outputHex;
 
-            // convert Decimal to Binary
-            if (comboBox_input.SelectedIndex == 0 && comboBox_output.SelectedIndex == 1)
+            int inputSelection = comboBox_input.SelectedIndex;
+            int outputSelection = comboBox_output.SelectedIndex;
+
+            /* INPUT/OUTPUT    INDEX
+             * Decimal         0
+             * ASCII           1
+             * Binary          2
+             * Hexadecimal     3
+             */
+            
+            // Convert Decimal to ASCII
+            if (inputSelection == 0 && outputSelection == 1)
             {
 
-                input_decNumber = txt_input.Text;
-                decInput = Int32.Parse(input_decNumber);
+                inputDec = txt_input.Text;
+                String[] dec = new String[0];
+                outputAscii = string.Empty;
 
-                output_binary = Convert.ToString(decInput, 2);
+                try
+                {
+                    // Store decimal numbers in array 'dec'
+                    foreach (var t in inputDec)
+                    {
+                        dec = inputDec.Split(' ');
+                    }
 
-                txt_output.Text = output_binary;
+                    // Convert every element (decimal number) stored in 'dec' to an ASCII char
+                    foreach (var element in dec)
+                    {
+                        outputAscii += Convert.ToChar(Convert.ToByte(element)).ToString();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    if (ex is ArgumentOutOfRangeException)
+                    {
+                        MessageBox.Show(
+                            "Invailed input! Try to use a '0' in front of the number when you want to convert a single number, which is less than 100.",
+                            "Argument Out Of RangeException",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (ex is FormatException)
+                    {
+                        MessageBox.Show("Invailed input! There is no actual decimal number", "Format Exeption",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);   
+                    }
+                    
+                }
+
+                txt_output.Text = outputAscii;
+
+            }
+            // Convert Decimal to Binary
+            else if (inputSelection == 0 && outputSelection == 2)
+            {
+
+                inputDec = txt_input.Text;
+
+                String[] dec = new String[0];
+                outputBin = string.Empty;
+
+                // Store decimal numbers in array 'dec'
+                foreach (var t in inputDec)
+                {
+                    dec = inputDec.Split(' ');
+                }
+
+                try
+                {
+                    // Convert every element (decimal number) stored in 'dec' to an binary number
+                    foreach (var element in dec)
+                    {
+                        decInput = Int32.Parse(element);
+                        outputBin += Convert.ToString(decInput, 2) + " ";
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invailed input! There is no actual decimal number", "Format Exeption",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_output.Text = outputBin;
 
             }
             // Convert Decimal to Hex
-            else if (comboBox_input.SelectedIndex == 0 && comboBox_output.SelectedIndex == 2)
+            else if (inputSelection == 0 && outputSelection == 3)
             {
 
-                input_decNumber = txt_input.Text;
-                decInput = Int32.Parse(input_decNumber);
+                inputDec = txt_input.Text;
 
-                output_hex = decInput.ToString("X");
+                String[] dec = new String[0];
+                outputHex = string.Empty;
 
-                txt_output.Text = output_hex;
+                // Store decimal numbers in array 'dec'
+                for (var i = 0; i < inputDec.Length; i++)
+                {
+                    dec = inputDec.Split(' ');
+                }
+
+                try
+                {
+                    // Convert every element (decimal number) stored in 'dec' to an hexadecimal number
+                    foreach (var element in dec)
+                    {
+                        decInput = Int32.Parse(element);
+                        outputHex += decInput.ToString("X") + " ";
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invailed input! There is no actual decimal number", "Format Exeption",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_output.Text = outputHex;
+
+            }
+            // Convert ASCII to Decimal
+            else if (inputSelection == 1 && outputSelection == 0)
+            {
+
+                inputAscii = txt_input.Text;
+                outputDec = string.Empty;
+
+                for (var i = 0; i < inputAscii.Length; ++i)
+                {
+                    string cDec = ((byte)inputAscii[i]).ToString();
+
+                    if (cDec.Length < 3)
+                        cDec = cDec.PadLeft(3, '0');
+
+                    outputDec += cDec + " ";
+                }
+
+                txt_output.Text = outputDec;
+
+            }
+            // Convert ASCII to Binary
+            else if (inputSelection == 1 && outputSelection == 2)
+            {
+
+                inputAscii = txt_input.Text;
+                outputBin = string.Empty;
+
+                byte[] bytes = Encoding.ASCII.GetBytes(inputAscii);
+    
+                for (var i = 0; i < bytes.Length; i++)
+                {
+                    for (var j = 0; j < 8; j++)
+                    {
+                        outputBin += (bytes[i] & 0x80) > 0 ? "1" : "0";
+                        bytes[i] <<= 1;
+                    }
+                    outputBin += " ";
+                }
+                
+                // txt_output.Text = "Hello Wolrd!";
+                txt_output.Text = outputBin;
+
+            }
+            // Convert ASCII to Hex
+            else if (inputSelection == 1 && outputSelection == 3)
+            {
+
+                inputAscii = txt_input.Text;
+                outputHex = String.Empty;
+
+                char[] ascii = inputAscii.ToCharArray();
+
+                foreach (var element in ascii)
+                {
+                    int value = Convert.ToInt32(element);
+                    outputHex += String.Format("{0:X}", value) + " ";
+                }
+
+                txt_output.Text = outputHex.ToString().ToUpper();
 
             }
             // Convert Binary to Decimal
-            else if (comboBox_input.SelectedIndex == 1 && comboBox_output.SelectedIndex == 0)
+            else if (inputSelection == 2 && outputSelection == 0)
             {
 
-                input_binaryNumber = txt_input.Text;
+                inputBin = txt_input.Text;
 
-                output_dec = Convert.ToInt32(input_binaryNumber, 2).ToString();
+                String[] bin = new String[0];
+                outputDec = string.Empty;
 
-                txt_output.Text = output_dec;
+                // Store binary numbers in array 'bin'
+                foreach (var t in inputBin)
+                {
+                    bin = inputBin.Split(' ');
+                }
+
+                try
+                {
+                    // Convert every element (binary number) stored in 'bin' to an decimal number
+                    foreach (var element in bin)
+                    {
+                        outputDec += Convert.ToInt32(element, 2).ToString() + " ";
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invailed input! There is no actual decimal number", "Format Exeption",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_output.Text = outputDec;
+
+            }
+            // Convert Binary to ASCII
+            else if (inputSelection == 2 && outputSelection == 1)
+            {
+                
+                inputBin = txt_input.Text;
+                String[] bin = new String[0];
+                outputAscii = String.Empty;
+                
+                // Store binary numbers in array 'bin'
+                foreach (var t in inputBin)
+                {
+                    bin = inputBin.Split(' ');
+                }
+
+                try
+                {
+                    // Convert every element (binary number) stored in 'bin' to an ASCII char
+                    foreach (var element in bin)
+                    {
+                        outputAscii += Convert.ToChar(Convert.ToByte(element, 2)).ToString();
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invailed input! There is no actual decimal number", "Format Exeption",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_output.Text = outputAscii;
 
             }
             // Convert Binary to Hex
-            else if (comboBox_input.SelectedIndex == 1 && comboBox_output.SelectedIndex == 2)
+            else if (inputSelection == 2 && outputSelection == 3)
             {
 
-                input_binaryNumber = txt_input.Text;
+                inputBin = txt_input.Text;
 
-                output_hex = Convert.ToInt32(input_binaryNumber, 2).ToString("X");
+                String[] bin = new String[0];
+                outputHex = string.Empty;
 
-                txt_output.Text = output_hex;
+                // Store binary numbers in array 'bin'
+                foreach (var t in inputBin)
+                {
+                    bin = inputBin.Split(' ');
+                }
+
+                try
+                {
+                    // Convert every element (binary number) stored in 'bin' to an hexadecimal number
+                    foreach (var element in bin)
+                    {
+                        outputHex += Convert.ToInt32(element, 2).ToString("X") + " ";
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invailed input! There is no actual decimal number", "Format Exeption",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_output.Text = outputHex;
 
             }
             // Convert Hex to Decimal
-            else if (comboBox_input.SelectedIndex == 2 && comboBox_output.SelectedIndex == 0)
+            else if (inputSelection == 3 && outputSelection == 0)
             {
 
-                input_hexNumber = txt_input.Text;
+                inputHex = txt_input.Text;
 
-                output_dec = Convert.ToString(Convert.ToInt32(input_hexNumber, 16));
+                String[] hex = new String[0];
+                outputDec = String.Empty;
 
-                txt_output.Text = output_dec;
+                // Store hexadecimal numbers in array 'hex'
+                foreach (var t in inputHex)
+                {
+                    hex = inputHex.Split(' ');
+                }
+
+                try
+                {
+                    // Convert every element (hexadecimal number) stored in 'hex' to an decimal number
+                    foreach (var element in hex)
+                    {
+                        outputDec += Convert.ToString(Convert.ToInt32(element, 16)) + " ";
+                    }
+                    txt_output.Text = outputDec;
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invailed input! There is no actual hexadecimal number", "Format Exeption",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            // Convert Hex to ASCII
+            else if (inputSelection == 3 && outputSelection == 1)
+            {
+
+                inputHex = txt_input.Text;
+                String[] hex = new String[0];
+                outputAscii = String.Empty;
+                
+                // Store hexadecimal numbers in array 'hex'
+                foreach (var t in inputHex)
+                {
+                    hex = inputHex.Split(' ');
+                }
+
+                try
+                {
+                    // Convert every element (hexadecimal number) stored in 'hex' to an ASCII char
+                    foreach (var element in hex)
+                    {
+                        outputAscii += Convert.ToChar(Convert.ToByte(element, 16)).ToString();
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invailed input! There is no actual decimal number", "Format Exeption",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_output.Text = outputAscii;
 
             }
             // Convert Hex to Binary
-            else if (comboBox_input.SelectedIndex == 2 && comboBox_output.SelectedIndex == 1)
+            else if (inputSelection == 3 && outputSelection == 2)
             {
 
-                input_hexNumber = txt_input.Text;
+                inputHex = txt_input.Text;
 
-                output_binary = Convert.ToString(Convert.ToInt64(input_hexNumber, 16), 2);
+                String[] hex = new String[0];
+                outputBin = String.Empty;
 
-                txt_output.Text = output_binary;
+                // Store hexadecimal numbers in array 'hex'
+                foreach (var t in inputHex)
+                {
+                    hex = inputHex.Split(' ');
+                }
+
+                try
+                {
+                    // Convert every element (hexadecimal number) stored in 'hex' to an binary number
+                    foreach (var element in hex)
+                    {
+                        outputBin += Convert.ToString(Convert.ToInt64(element, 16), 2) + " ";
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invailed input! There is no actual hexadecimal number", "Format Exeption",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_output.Text = outputBin;
 
             }
+            else if (inputSelection == outputSelection)
+            {
+                txt_output.Text = txt_input.Text;
+            }
+
+            // When copyed reset copy button
+            if (btn_copy.Text == "COPYED")
+                btn_copy.Text = "COPY";
 
         }
 
@@ -111,27 +426,54 @@ namespace NumberSystemConverter
         // Select number_system you want to convert from
         private void ComboBox_input_SelectedIndexChanged(object sender, EventArgs e)
         {
+            switch (comboBox_input.SelectedIndex)
+            {
+                case 0:
+                    label_input.Text = "Decimal";
+                    break;
 
-            if (comboBox_input.SelectedIndex == 0)
-                label_input.Text = "Decimal";
-            else if (comboBox_input.SelectedIndex == 1)
-                label_input.Text = "Binary";
-            else if (comboBox_input.SelectedIndex == 2)
-                label_input.Text = "Hex";
+                case 1:
+                    label_input.Text = "ASCII";
+                    break;
 
+                case 2:
+                    label_input.Text = "Binary";
+                    break;
+
+                case 3:
+                    label_input.Text = "Hex";
+                    break;
+            }
         }
 
         // Selcet number_system you want to convert to
         private void ComboBox_output_SelectedIndexChanged(object sender, EventArgs e)
         {
+            switch (comboBox_output.SelectedIndex)
+            {
+                case 0:
+                    label_output.Text = "Decimal";
+                    break;
 
-            if (comboBox_output.SelectedIndex == 0)
-                label_output.Text = "Decimal";
-            else if (comboBox_output.SelectedIndex == 1)
-                label_output.Text = "Binary";
-            else if (comboBox_output.SelectedIndex == 2)
-                label_output.Text = "Hex";
+                case 1:
+                    label_output.Text = "ASCII";
+                    break;
 
+                case 2:
+                    label_output.Text = "Binary";
+                    break;
+
+                case 3:
+                    label_output.Text = "Hex";
+                    break;
+            }
+        }
+
+        private void btn_copy_Click(object sender, EventArgs e)
+        {
+            // Copy output value
+            Clipboard.SetText(txt_output.Text);
+            btn_copy.Text = "COPYED";
         }
     }
 }
